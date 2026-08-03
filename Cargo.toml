@@ -55,6 +55,7 @@ tracing = { version = "0.1", optional = true }
 log = "0.4"
 
 [dev-dependencies]
+cargo-husky = { version = "1.5", default-features = false, features = ["user-hooks"] }
 tokio = { version = "1", features = ["rt-multi-thread", "macros"] }
 armature-testkit = { path = "../armature-testkit", features = ["containers"] }
 

@@ -224,7 +224,7 @@ fn deferrable_statement(
 /// ```
 pub async fn run_transaction<C, F, T, E>(conn: &C, f: F) -> Result<T, sea_orm::TransactionError<E>>
 where
-    C: TransactionTrait,
+    C: TransactionTrait<Transaction = DatabaseTransaction>,
     F: for<'c> FnOnce(
             &'c DatabaseTransaction,
         ) -> Pin<Box<dyn Future<Output = Result<T, E>> + Send + 'c>>
@@ -242,7 +242,7 @@ pub async fn run_transaction_with_isolation<C, F, T, E>(
     f: F,
 ) -> Result<T, sea_orm::TransactionError<E>>
 where
-    C: TransactionTrait,
+    C: TransactionTrait<Transaction = DatabaseTransaction>,
     F: for<'c> FnOnce(
             &'c DatabaseTransaction,
         ) -> Pin<Box<dyn Future<Output = Result<T, E>> + Send + 'c>>

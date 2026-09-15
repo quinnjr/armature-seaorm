@@ -2,7 +2,7 @@
 
 use crate::{DatabaseConfig, SeaOrmError, SeaOrmResult};
 use armature_log::{debug, info};
-use sea_orm::{ConnectionTrait, DatabaseConnection};
+use sea_orm::DatabaseConnection;
 use std::sync::Arc;
 
 /// Database wrapper providing connection management.
@@ -80,6 +80,9 @@ impl Database {
             sea_orm::DatabaseBackend::Postgres => DatabaseBackend::Postgres,
             sea_orm::DatabaseBackend::MySql => DatabaseBackend::MySql,
             sea_orm::DatabaseBackend::Sqlite => DatabaseBackend::Sqlite,
+            // SeaORM 2.0 marks its backend enum `#[non_exhaustive]`; it has no
+            // other variants, so this arm only fires if a future SeaORM adds one.
+            other => unreachable!("unsupported SeaORM database backend: {other:?}"),
         }
     }
 }

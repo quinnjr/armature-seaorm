@@ -1,12 +1,12 @@
 [package]
 name = "armature-seaorm"
-version = "0.2.0"
-edition.workspace = true
-rust-version.workspace = true
-authors.workspace = true
-license.workspace = true
+version = "0.3.0"
+edition = "2024"
+rust-version = "1.94.1"
+authors = ["Joseph Quinn <quinn.josephr@proton.me>"]
+license = "Apache-2.0"
 repository = "https://github.com/quinnjr/armature-seaorm"
-homepage.workspace = true
+homepage = "https://quinnjr.github.io/armature"
 description = "SeaORM database integration for the Armature framework"
 keywords = ["seaorm", "database", "orm", "async", "sql"]
 categories = ["database", "web-programming", "asynchronous"]
@@ -16,8 +16,10 @@ default = ["runtime-tokio-rustls", "sqlx-postgres"]
 # Runtime
 runtime-tokio-native-tls = ["sea-orm/runtime-tokio-native-tls"]
 runtime-tokio-rustls = ["sea-orm/runtime-tokio-rustls"]
-runtime-actix-native-tls = ["sea-orm/runtime-actix-native-tls"]
-runtime-actix-rustls = ["sea-orm/runtime-actix-rustls"]
+# SeaORM 2.0 dropped its actix runtimes (actix runs on tokio); these names are
+# kept so downstream feature lists keep resolving, and select the tokio runtime.
+runtime-actix-native-tls = ["runtime-tokio-native-tls"]
+runtime-actix-rustls = ["runtime-tokio-rustls"]
 # Database backends
 sqlx-postgres = ["sea-orm/sqlx-postgres"]
 sqlx-mysql = ["sea-orm/sqlx-mysql"]
@@ -35,8 +37,8 @@ tracing = ["dep:tracing"]
 
 [dependencies]
 # SeaORM
-sea-orm = { version = "1.1", default-features = false, features = ["macros"] }
-sea-query = "0.32"
+sea-orm = { version = "2.0", default-features = false, features = ["macros"] }
+sea-query = "1.0"
 
 # Async
 tokio = { version = "1", features = ["sync"] }
@@ -50,7 +52,7 @@ serde = { version = "1.0", features = ["derive"] }
 serde_json = "1.0"
 
 # Logging
-armature-log = { path = "../armature-log", version = "0" }
+armature-log = { version = "0.2" }
 tracing = { version = "0.1", optional = true }
 log = "0.4"
 

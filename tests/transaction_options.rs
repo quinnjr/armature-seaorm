@@ -42,7 +42,7 @@ async fn begin_transaction_with_options_applies_isolation_and_read_only() {
     let backend = txn.get_database_backend();
 
     let isolation_row = txn
-        .query_one(Statement::from_string(
+        .query_one_raw(Statement::from_string(
             backend,
             "SHOW transaction_isolation".to_owned(),
         ))
@@ -58,7 +58,7 @@ async fn begin_transaction_with_options_applies_isolation_and_read_only() {
     );
 
     let read_only_row = txn
-        .query_one(Statement::from_string(
+        .query_one_raw(Statement::from_string(
             backend,
             "SHOW transaction_read_only".to_owned(),
         ))
@@ -74,7 +74,7 @@ async fn begin_transaction_with_options_applies_isolation_and_read_only() {
     );
 
     let deferrable_row = txn
-        .query_one(Statement::from_string(
+        .query_one_raw(Statement::from_string(
             backend,
             "SHOW transaction_deferrable".to_owned(),
         ))

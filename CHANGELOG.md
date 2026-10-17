@@ -9,6 +9,18 @@ Earlier changes are recorded in the workspace [`CHANGELOG.md`](../CHANGELOG.md).
 
 ## [Unreleased]
 
+### Removed
+
+- **Breaking:** The `runtime-tokio-native-tls` and `runtime-actix-native-tls` features are removed (they pulled in OpenSSL through sqlx; Armature is rustls-only). Use `runtime-tokio-rustls` (the default) or `runtime-actix-rustls`.
+
+### Changed
+
+- **Sibling requirements follow the security-hardening release train (breaking).**
+  `armature-log` 0.2 → 0.3. Those releases change public APIs and secure-by-default behaviour
+  (see each crate's CHANGELOG); this crate's minor moves with them so a
+  downstream build can't mix it with the previous sibling releases. No code
+  changes in this crate.
+
 ## [0.3.0] - 2026-09-15
 
 ### Changed

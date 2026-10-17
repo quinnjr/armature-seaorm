@@ -9,6 +9,8 @@ Earlier changes are recorded in the workspace [`CHANGELOG.md`](../CHANGELOG.md).
 
 ## [Unreleased]
 
+## [0.4.0] - 2026-10-17
+
 ### Removed
 
 - **Breaking:** The `runtime-tokio-native-tls` and `runtime-actix-native-tls` features are removed (they pulled in OpenSSL through sqlx; Armature is rustls-only). Use `runtime-tokio-rustls` (the default) or `runtime-actix-rustls`.
